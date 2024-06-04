@@ -1,10 +1,13 @@
 # player.py
+from item import HealingPotion
+
 class Player:
     def __init__(self, game_map):
         self.position = [0, 0]  # Courtyard
         self.game_map = game_map
         self.health = 100
         self.attack_power = 10
+        self.inventory = [HealingPotion() for _ in range(5)]  # Add 5 healing potions to the player's inventory
 
     def update_position(self, direction, steps):
         row_offset, col_offset = self.game_map.valid_directions[direction]
@@ -20,3 +23,11 @@ class Player:
         if self.health <= 0:
             print("Game Over! You have been defeated.")
             exit()
+
+    def use_item(self, item_index):
+        if 0 <= item_index < len(self.inventory):
+            item = self.inventory[item_index]
+            item.use(self)
+            self.inventory.remove(item)
+        else:
+            print("Invalid item index.")

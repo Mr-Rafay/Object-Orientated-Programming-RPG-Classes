@@ -46,9 +46,16 @@ class Combat:
         print(f"The {self.enemy.name} attacks you for {damage} damage.")
 
     def use_item(self):
-        print("Which item do you want to use?")
-        item_name = input("> ")
-        self.player.inventory.use_item(item_name)
+        print("Inventory:")
+        for index, item in enumerate(self.player.inventory, start=1):
+            print(f"{index}. {item.name}")
+
+        if not self.player.inventory:
+            print("Your inventory is empty.")
+            return
+
+        item_index = int(input("Enter the item number to use: ")) - 1
+        self.player.use_item(item_index)
 
     def flee(self):
         print("You flee from the battle.")
