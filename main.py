@@ -1,4 +1,17 @@
 # main.py
+# ---------------------------------------------------------------------------
+# Created By  : Rafay Waqas
+# Created Date: 5/22/2024
+# version = '4.0'
+# ---------------------------------------------------------------------------
+"""
+Medieval Text-based Map Game
+----------------------------------
+This program is a simple text-based map game set in a medieval
+world. The player navigates through a map, using the commands 'walk' and 'run'.
+The game map is represented using a list of lists (array), and location descriptions are stored in a dictionary.
+"""
+# ---------------------------------------------------------------------------
 from player import Player
 from game_map import GameMap
 from inventory import Inventory
