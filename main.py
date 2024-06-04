@@ -1,6 +1,7 @@
+# main.py
 # ---------------------------------------------------------------------------
 # Created By  : Rafay Waqas
-# Created Date: 5/22/2024
+# Created Date: 3/19/2024
 # version = '4.0'
 # ---------------------------------------------------------------------------
 """
@@ -18,6 +19,9 @@ from player import Player
 from game_map import GameMap
 from inventory import Inventory
 from location import Location
+from enemy import Enemy
+from item import Item
+from combat import Combat
 
 
 # ----FUNCTIONS--------------------------------------------------------------

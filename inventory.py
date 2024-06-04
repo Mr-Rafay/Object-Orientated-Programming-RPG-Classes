@@ -20,6 +20,8 @@ class Inventory:
         if self.items:
             print("Inventory:")
             for item in self.items:
-                print("- " + item)
+                print("- " + item.name)
         else:
             print("Your inventory is empty.")
+
+    def use_item(

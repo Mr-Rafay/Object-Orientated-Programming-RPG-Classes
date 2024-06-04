@@ -1,5 +1,7 @@
 # game_map.py
 from location import Location
+from enemy import Enemy
+from item import Item
 
 
 class GameMap:
@@ -8,9 +10,9 @@ class GameMap:
     def __init__(self):
         """Initialize the game map and valid actions/directions."""
         self.game_map = [
-            [Location('Courtyard'), Location('Enchanted Forest'), Location('Misty Mountains')],
-            [Location('Raging River'), Location('Damp Dungeon'), Location('Guarded Castle')],
-            [Location('Sandy Shore'), Location('Mysterious Island'), Location('Throne Room')]
+            [Location('Courtyard', None), Location('Enchanted Forest', Enemy('Goblin', 50, 5)), Location('Misty Mountains', None)],
+            [Location('Raging River', None), Location('Damp Dungeon', Enemy('Skeleton', 30, 8)), Location('Guarded Castle', Enemy('Knight', 80, 12))],
+            [Location('Sandy Shore', None), Location('Mysterious Island', None), Location('Throne Room', None)]
         ]
         self.valid_actions = ['walk', 'run']
         self.valid_directions = {'north': (-1, 0), 'south': (1, 0), 'east': (0, 1), 'west': (0, -1)}
@@ -24,6 +26,11 @@ class GameMap:
             if current_location.name == 'Throne Room':
                 print("Congratulations! You have reached the Throne Room and completed your quest.")
                 break
+
+            if current_location.enemy:
+                print(f"You encounter a {current_location.enemy.name}!")
+                combat = Combat(player, current_location.enemy)
+                combat.start_combat()
 
             print(f"What do you want to do? (Valid actions: {', '.join(self.valid_actions)})")
             action = input("> ").lower()

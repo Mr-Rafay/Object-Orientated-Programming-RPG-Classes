@@ -2,10 +2,12 @@
 class Location:
     """Represents a location in the game."""
 
-    def __init__(self, name):
-        """Initialize the location with a name and description."""
+    def __init__(self, name, enemy=None, item=None):
+        """Initialize the location with a name, enemy, and item."""
         self.name = name
         self.description = self.get_description()
+        self.enemy = enemy
+        self.item = item
 
     def get_description(self):
         """Return the description of the location based on its name."""
@@ -28,9 +30,7 @@ class Location:
 
     def perform_action(self, player, inventory):
         """Perform a location-specific action."""
-        if self.name == 'Enchanted Forest':
-            print("You find a magical amulet in the forest. You add it to your inventory.")
-            inventory.add_item('Magical Amulet')
-        elif self.name == 'Damp Dungeon':
-            print("You discover a rusty key in the dungeon. You add it to your inventory.")
-            inventory.add_item('Rusty Key')
+        if self.item:
+            print(f"You find a {self.item.name}. You add it to your inventory.")
+            inventory.add_item(self.item)
+            self.item = None
