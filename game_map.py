@@ -2,13 +2,10 @@
 from location import Location
 from enemy import Enemy
 from item import Item
-
+from combat import Combat  # Add this import statement
 
 class GameMap:
-    """Represents the game map."""
-
     def __init__(self):
-        """Initialize the game map and valid actions/directions."""
         self.game_map = [
             [Location('Courtyard', None), Location('Enchanted Forest', Enemy('Goblin', 50, 5)), Location('Misty Mountains', None)],
             [Location('Raging River', None), Location('Damp Dungeon', Enemy('Skeleton', 30, 8)), Location('Guarded Castle', Enemy('Knight', 80, 12))],
@@ -18,7 +15,6 @@ class GameMap:
         self.valid_directions = {'north': (-1, 0), 'south': (1, 0), 'east': (0, 1), 'west': (0, -1)}
 
     def play_game(self, player, inventory):
-        """Start the game."""
         while True:
             current_location = self.game_map[player.position[0]][player.position[1]]
             current_location.display_description()

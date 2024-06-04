@@ -1,16 +1,12 @@
 # location.py
 class Location:
-    """Represents a location in the game."""
-
     def __init__(self, name, enemy=None, item=None):
-        """Initialize the location with a name, enemy, and item."""
         self.name = name
         self.description = self.get_description()
         self.enemy = enemy
         self.item = item
 
     def get_description(self):
-        """Return the description of the location based on its name."""
         descriptions = {
             'Courtyard': 'You find yourself in the castle courtyard. The adventure begins!',
             'Enchanted Forest': 'You enter an enchanted forest filled with ancient trees and magical creatures.',
@@ -25,11 +21,9 @@ class Location:
         return descriptions[self.name]
 
     def display_description(self):
-        """Display the description of the location."""
         print(self.description)
 
     def perform_action(self, player, inventory):
-        """Perform a location-specific action."""
         if self.item:
             print(f"You find a {self.item.name}. You add it to your inventory.")
             inventory.add_item(self.item)
