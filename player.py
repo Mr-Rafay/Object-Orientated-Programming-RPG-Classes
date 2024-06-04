@@ -1,19 +1,19 @@
 # player.py
-
-from inventory import Inventory
-
 class Player:
-    """Class to represent the player."""
+    """Represents the player character in the game."""
 
-    def __init__(self, name, x, y):
-        self.name = name
-        self.position = (x, y)
-        self.inventory = Inventory()
+    def __init__(self, game_map):
+        """Initialize the player with starting position."""
+        self.position = [0, 0]  # Courtyard
+        self.game_map = game_map
 
-    def move(self, dx, dy):
-        """Move player by (dx, dy)."""
-        self.position = (self.position[0] + dx, self.position[1] + dy)
+    def update_position(self, direction, steps):
+        """Update the player's position based on the given direction and steps."""
+        row_offset, col_offset = self.game_map.valid_directions[direction]
+        self.position[0] += row_offset * steps
+        self.position[1] += col_offset * steps
 
-    def collect_object(self, obj):
-        """Collect an object and add it to the inventory."""
-        self.inventory.add_item(obj)
+    def is_valid_move(self, position):
+        """Check if the given position is a valid move within the map boundaries."""
+        row, col = position
+        return 0 <= row < len(self.game_map.game_map) and 0 <= col < len(self.game_map.game_map[0])

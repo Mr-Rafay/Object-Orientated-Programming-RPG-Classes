@@ -1,27 +1,52 @@
-# main.py
+# ---------------------------------------------------------------------------
+# Created By  : Rafay Waqas
+# Created Date: 5/22/2024
+# version = '4.0'
+# ---------------------------------------------------------------------------
+"""
+Medieval Text-based Map Game
+----------------------------------
+This program is a simple text-based map game set in a medieval
+world. The player navigates through a map, using the commands 'walk' and 'run'.
+The game map is represented using a list of lists (array), and location descriptions are
+stored in a dictionary.
+"""
+# ---------------------------------------------------------------------------
 
+# ----IMPORTS AND GLOBAL VARIABLES--------------------------------------------
 from player import Player
-from enemy import Enemy
-from obstacle import Obstacle
-from object import GameObject
-from map import GameMap
+from game_map import GameMap
+from inventory import Inventory
+from location import Location
 
+
+# ----FUNCTIONS--------------------------------------------------------------
+def display_main_menu():
+    """Display the main menu."""
+    print("==== Medieval Adventure Game ====")
+    print("1. Start Game")
+    print("2. Quit")
+
+
+# ----MAIN-------------------------------------------------------------------
 def main():
-    # Initialize game components
-    player = Player("Hero", 0, 0)
-    game_map = GameMap(5, 5)
+    """The main game loop."""
+    game_map = GameMap()
+    player = Player(game_map)
+    inventory = Inventory()
 
-    # Add objects and obstacles
-    game_map.add_content(1, 1, Obstacle("Rock", 1, 1))
-    game_map.add_content(2, 2, GameObject("Treasure", 2, 2))
-    game_map.add_content(3, 3, Enemy("Goblin", 5, 3, 3))
-
-    # Game loop
     while True:
-        print(f"Player position: {player.position}")
-        command = input("Enter command (move/view inventory/collect): ").strip().lower()
+        display_main_menu()
+        choice = input("> ")
 
-        if command == "move":
-            dx = int(input("Enter dx: "))
-            dy = int(input("Enter dy: "))
-            new_x = player.position[0] + dx
+        if choice == '1':
+            game_map.play_game(player, inventory)
+        elif choice == '2':
+            print("Thank you for playing. Farewell!")
+            break
+        else:
+            print("Invalid choice. Please select a valid option.")
+
+
+if __name__ == '__main__':
+    main()
